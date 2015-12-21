@@ -1,6 +1,6 @@
 /*
- *  ofxJSONFile.h
- *  asift
+ *  ofxJSON.h
+ *  ofxJSON
  *
  *  Created by Jeffrey Crouse on 12/17/10.
  *  Copyright 2010 Eyebeam. All rights reserved.
@@ -18,18 +18,18 @@
 #include "ofLog.h"
 #include "ofURLFileLoader.h"
 
-// Add a typedef for a shorter type name
-class ofxJSONElement;
-typedef ofxJSONElement ofxJSON;
+// Add a typedef for backward compatibility
+class ofxJSON;
+typedef ofxJSON ofxJSONElement;
 
-class ofxJSONElement: public Json::Value
+class ofxJSON: public Json::Value
 {
 public:
-    ofxJSONElement();
-    ofxJSONElement(const std::string& jsonString);
-    ofxJSONElement(const Json::Value& v);
+    ofxJSON();
+    ofxJSON(const std::string& jsonString);
+    ofxJSON(const Json::Value& v);
 
-    virtual ~ofxJSONElement();
+    virtual ~ofxJSON();
 
     bool parse(const std::string& jsonString);
     bool open(const std::string& filename);
