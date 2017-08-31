@@ -36,7 +36,7 @@ bool ofxJSON::parse(const std::string& jsonString)
 }
 
 
-bool ofxJSON::open(const string& filename)
+bool ofxJSON::open(const std::string& filename)
 {
     if (filename.find("http://") == 0 || filename.find("https://") == 0)
     {
@@ -96,10 +96,10 @@ bool ofxJSON::save(const std::string& filename, bool pretty) const
     if (pretty)
     {
         Json::StyledWriter writer;
-        file << writer.write( *this ) << endl;
+        file << writer.write( *this ) << std::endl;
     } else {
         Json::FastWriter writer;
-        file << writer.write( *this ) << endl;
+        file << writer.write( *this ) << std::endl;
     }
 
     ofLogVerbose("ofxJSON") << "save: JSON saved to " << file.getAbsolutePath() << ".";
