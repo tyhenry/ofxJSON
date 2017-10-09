@@ -52,32 +52,34 @@ bool ofxJSON::open(const std::string& filename)
 bool ofxJSON::openLocal(const std::string& filename)
 {
     ofBuffer buffer = ofBufferFromFile(filename);
+	istringstream ss(buffer);
 
-    Json::Reader reader;
-
-    if (!reader.parse(buffer.getText(), *this))
-    {
-        ofLogError("ofxJSON") << "openLocal: Unable to parse " << filename << ": " << reader.getFormattedErrorMessages();
+	try {
+		ss >> *this;
+	}
+	catch (std::exception& e)
+	{
+		ofLogError("ofxJSON") << "openLocal: Unable to parse " << filename << ": " << e.what();
         return false;
-    }
-    else
-    {
-        return true;
-    }
+	}
+
+    return true;
 }
 
 
 bool ofxJSON::openRemote(const std::string& filename)
 {
     std::string result = ofLoadURL(filename).data.getText();
+	istringstream ss(buffer);
 
-    Json::Reader reader;
-
-    if (!reader.parse(result, *this))
-    {
-        ofLogError("ofxJSON") << "openRemote: Unable to parse " << filename << ": " << reader.getFormattedErrorMessages();
+	try {
+		ss >> *this;
+	}
+	catch (std::exception& e)
+	{
+		ofLogError("ofxJSON") << "openLocal: Unable to parse " << filename << ": " << e.what();
         return false;
-    }
+	}
 
     return true;
 }
